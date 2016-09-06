@@ -5,13 +5,13 @@ Some basic Golang packages complementing existing standard library `crypto` pack
 ## Installation
 
 ```
-$ go get github/andreburgaud/crypt2go
+$ go get github.com/andreburgaud/crypt2go
 ```
 
 or to update to the latest version:
 
 ```
-$ go get -u github/andreburgaud/crypt2go
+$ go get -u github.com/andreburgaud/crypt2go
 ```
 
 ## Disclaimer
