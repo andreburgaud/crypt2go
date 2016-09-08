@@ -88,7 +88,7 @@ func main() {
 }
 ```
 
-### AES Encryption in ECB mode and with padding
+### AES Encryption in ECB mode with padding
 
 ```go
 import (
@@ -156,18 +156,19 @@ Both ECB (Electronic Codebook) and CBC (Cipher Block Chaining) require blocks of
 
 The `padding` package exposes simple functions to provide a way to `pad` and `unpad` a given plaintext respectively prior to encryption and after decryption.
 
-The code examples in the previous section shows encryption examples with AES, Blowfish in ECB mode. Blowfish encrypts blocks of 8 bytes hence using the padding type described in the https://tools.ietf.org/html/rfc2898 *PKCS #5: Password-Based Cryptography Specification Version 2.0*. Whereas AES requires blocks of 16 bytes (128 bits). The padding type in the second example is based on https://tools.ietf.org/html/rfc2315 *PKCS #7: Cryptographic Message Syntax Version 1.5*.
+The code examples in the previous section shows encryption examples with Blowfish and AES in ECB mode. Blowfish encrypts blocks of 8 bytes hence using the padding type described in the https://tools.ietf.org/html/rfc2898 *PKCS #5: Password-Based Cryptography Specification Version 2.0*. Whereas AES requires blocks of 16 bytes (128 bits). The padding type in the second example is based on https://tools.ietf.org/html/rfc2315 *PKCS #7: Cryptographic Message Syntax Version 1.5*.
 
-The only difference between the two specs is only that PKCS #5 accommodates only for blocks of 8 bytes. The `padding` package reflects that and exposes two builders, resepectively `NewPkcs5Padding()` that embeds an hard-coded value for a block size of 8, while `NewPkcs7Padding(int blockSize)` takes a parameter for the block size. Nothing prevents to use `NewPkcs7Padding` with a block size of 8 to work with an encryption scheme working on blocks of 8 bytes, like *Blowfish*.
+The only difference between the two specs is only that PKCS #5 accommodates only for blocks of 8 bytes. The `padding` package reflects that and exposes two builders, resepectively `NewPkcs5Padding()` that embeds an hard-coded value for a block size of 8, while `NewPkcs7Padding(int blockSize)` takes a parameter for the block size. Nothing prevents using `NewPkcs7Padding` with a block size of 8 to work with an encryption scheme working on blocks of 8 bytes, like *Blowfish*.
 
-## Additional Details
+## Additional Examples
 
-Check the unit tests in the code and the godoc string for additional details.
+See the unit tests or the example tests in the respective package directories.
 
 ## License
 
-Some of the code, in particular the `ecb` package is directly modeled after the Golang code (`cipher/cbc.go`). To avoid any license conflicts, `crypt2go` is released under a BSD license. See the LICENSE file in the repository.
+The `ecb` package, is directly modeled after the CBC Golang code (https://golang.org/src/crypto/cipher/cbc.go) released under a BSD license (https://golang.org/LICENSE). To avoid any license conflicts, `crypt2go` is also released under a BSD license. 
 
-The Go Authors license is available at https://golang.org/LICENSE. The reference to this license is made in the code where appropriate.
+See the LICENSE file in the repository.
+
 
 
