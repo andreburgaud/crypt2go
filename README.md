@@ -1,5 +1,7 @@
 # Crypt2go
 
+[![GoDoc](https://godoc.org/github.com/andreburgaud/crypt2go?status.svg)](https://godoc.org/github.com/andreburgaud/crypt2go)
+
 Some basic Golang packages complementing existing standard library `crypto` packages and the extension packages `x/crypto`.
 
 ## Installation

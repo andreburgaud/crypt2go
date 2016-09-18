@@ -19,6 +19,9 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found at https://golang.org/LICENSE
 
+// Package ecb implements block cipher mode of encryption ECB (Electronic Code
+// Book) functions. This is implemented for legacy purposes only and should not
+// be used for any new encryption needs. Use CBC (Cipher Block Chaining) instead.
 package ecb
 
 import (
