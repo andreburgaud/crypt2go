@@ -1,6 +1,8 @@
 # Crypt2go
 
 [![GoDoc](https://godoc.org/github.com/andreburgaud/crypt2go?status.svg)](https://godoc.org/github.com/andreburgaud/crypt2go)
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![Go Report Card](https://goreportcard.com/badge/github.com/andreburgaud/crypt2go)](https://goreportcard.com/report/github.com/andreburgaud/crypt2go)
 
 Some basic Golang packages complementing existing standard library `crypto` packages and the extension packages `x/crypto`.
 
@@ -168,7 +170,7 @@ See the unit tests or the example tests in the respective package directories.
 
 ## License
 
-The `ecb` package, is directly modeled after the CBC Golang code (https://golang.org/src/crypto/cipher/cbc.go) released under a BSD license (https://golang.org/LICENSE). To avoid any license conflicts, `crypt2go` is also released under a BSD license. 
+The `ecb` package, is directly modeled after the CBC Golang code (https://golang.org/src/crypto/cipher/cbc.go) released under a BSD license (https://golang.org/LICENSE). To avoid any license conflicts, `crypt2go` is also released under a BSD license.
 
 See the LICENSE file in the repository.
 
