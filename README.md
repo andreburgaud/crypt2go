@@ -18,6 +18,14 @@ or to update to the latest version:
 $ go get -u github.com/andreburgaud/crypt2go
 ```
 
+## Test
+
+In the `cryp2go` directory:
+
+```
+$ go test ./...
+```
+
 ## Disclaimer
 
 I'm, by no mean, an expert in cryptography and welcome any comment or suggestion to improve the code included in this repository.

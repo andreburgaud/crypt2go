@@ -1,11 +1,10 @@
-package ecb_test
+package ecb
 
 import (
 	"crypto/aes"
 	"encoding/hex"
 	"fmt"
 
-	"github.com/andreburgaud/crypt2go/ecb"
 	"golang.org/x/crypto/blowfish"
 )
 
@@ -16,7 +15,7 @@ func ExampleNewECBEncrypter() {
 	if err != nil {
 		panic(err.Error())
 	}
-	mode := ecb.NewECBEncrypter(block)
+	mode := NewECBEncrypter(block)
 	ciphertext := make([]byte, len(plaintext))
 	mode.CryptBlocks(ciphertext, plaintext)
 	fmt.Printf("%X\n", ciphertext)
@@ -30,7 +29,7 @@ func ExampleNewECBEncrypter_second() {
 	if err != nil {
 		panic(err.Error())
 	}
-	mode := ecb.NewECBEncrypter(block)
+	mode := NewECBEncrypter(block)
 	ciphertext := make([]byte, len(plaintext))
 	mode.CryptBlocks(ciphertext, plaintext)
 	fmt.Printf("%X\n", ciphertext)
@@ -47,7 +46,7 @@ func ExampleNewECBDecrypter() {
 	if err != nil {
 		panic(err.Error())
 	}
-	mode := ecb.NewECBDecrypter(block)
+	mode := NewECBDecrypter(block)
 	plaintext := make([]byte, len(ciphertext))
 	mode.CryptBlocks(plaintext, ciphertext)
 	fmt.Printf("%s\n", string(plaintext))
@@ -64,7 +63,7 @@ func ExampleNewECBDecrypter_second() {
 	if err != nil {
 		panic(err.Error())
 	}
-	mode := ecb.NewECBDecrypter(block)
+	mode := NewECBDecrypter(block)
 	plaintext := make([]byte, len(ciphertext))
 	mode.CryptBlocks(plaintext, ciphertext)
 	fmt.Printf("%s\n", string(plaintext))

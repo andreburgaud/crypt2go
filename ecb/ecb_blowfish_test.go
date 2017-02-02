@@ -2,13 +2,12 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package ecb_test
+package ecb
 
 import (
 	"bytes"
 	"testing"
 
-	"github.com/andreburgaud/crypt2go/ecb"
 	"golang.org/x/crypto/blowfish"
 )
 
@@ -60,7 +59,7 @@ func TestECBEncrypterBlowfish(t *testing.T) {
 			continue
 		}
 
-		encrypter := ecb.NewECBEncrypter(c)
+		encrypter := NewECBEncrypter(c)
 
 		data := make([]byte, len(test.in))
 		copy(data, test.in)
@@ -80,7 +79,7 @@ func TestECBDecrypterBlowfish(t *testing.T) {
 			continue
 		}
 
-		decrypter := ecb.NewECBDecrypter(c)
+		decrypter := NewECBDecrypter(c)
 
 		data := make([]byte, len(test.out))
 		copy(data, test.out)

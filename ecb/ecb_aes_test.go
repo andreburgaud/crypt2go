@@ -16,14 +16,12 @@
 // Special Publication 800-38A, ``Recommendation for Block Cipher
 // Modes of Operation,'' 2001 Edition, pp. 24-27.
 
-package ecb_test
+package ecb
 
 import (
 	"bytes"
 	"crypto/aes"
 	"testing"
-
-	"github.com/andreburgaud/crypt2go/ecb"
 )
 
 var ecbAESTests = []ecbTest{
@@ -73,7 +71,7 @@ func TestECBEncrypterAES(t *testing.T) {
 			continue
 		}
 
-		encrypter := ecb.NewECBEncrypter(c)
+		encrypter := NewECBEncrypter(c)
 
 		data := make([]byte, len(test.in))
 		copy(data, test.in)
@@ -93,7 +91,7 @@ func TestECBDecrypterAES(t *testing.T) {
 			continue
 		}
 
-		decrypter := ecb.NewECBDecrypter(c)
+		decrypter := NewECBDecrypter(c)
 
 		data := make([]byte, len(test.out))
 		copy(data, test.out)
