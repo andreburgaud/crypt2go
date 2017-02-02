@@ -26,7 +26,7 @@ import (
 
 var ecbAESTests = []ecbTest{
 
-	ecbTest{
+	{
 		"ECB-AES128",
 		commonKey128,
 		commonInput,
@@ -38,7 +38,7 @@ var ecbAESTests = []ecbTest{
 		},
 	},
 
-	ecbTest{
+	{
 		"ECB-AES192",
 		commonKey192,
 		commonInput,
@@ -50,7 +50,7 @@ var ecbAESTests = []ecbTest{
 		},
 	},
 
-	ecbTest{
+	{
 		"ECB-AES256",
 		commonKey256,
 		commonInput,
