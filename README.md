@@ -20,7 +20,7 @@ $ go get -u github.com/andreburgaud/crypt2go
 
 ## Test
 
-In the `cryp2go` directory:
+In the `crypt2go` directory:
 
 ```
 $ go test ./...
