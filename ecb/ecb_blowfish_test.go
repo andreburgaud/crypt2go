@@ -14,7 +14,7 @@ import (
 var ecbBlowfishTests = []ecbTest{
 
 	// NIST SP 800-38A pp 24-27
-	ecbTest{
+	{
 		"ECB-Blowfish128",
 		commonKey128,
 		commonInput,
@@ -26,7 +26,7 @@ var ecbBlowfishTests = []ecbTest{
 		},
 	},
 
-	ecbTest{
+	{
 		"ECB-Blowfish192",
 		commonKey192,
 		commonInput,
@@ -38,7 +38,7 @@ var ecbBlowfishTests = []ecbTest{
 		},
 	},
 
-	ecbTest{
+	{
 		"ECB-Blowfish256",
 		commonKey256,
 		commonInput,
