@@ -87,3 +87,17 @@ func ExamplePadder_Unpad_third() {
 	// 0A0B0C0D0C0C0C0C0C0C0C0C0C0C0C0C
 	// 0A0B0C0D
 }
+
+func ExamplePadder_Unpad_empty() {
+	p := []byte{0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08}
+	fmt.Printf("%X\n", p)
+	padder := NewPkcs7Padding(8) // 8-byte block size
+	p, err := padder.Unpad(p)
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%v\n", p)
+	// Output:
+	// 0808080808080808
+	// []
+}
