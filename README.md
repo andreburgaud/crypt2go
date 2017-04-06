@@ -170,7 +170,7 @@ The `padding` package exposes simple functions to provide a way to `pad` and `un
 
 The code examples in the previous section shows encryption examples with Blowfish and AES in ECB mode. Blowfish encrypts blocks of 8 bytes hence using the padding type described in the https://tools.ietf.org/html/rfc2898 *PKCS #5: Password-Based Cryptography Specification Version 2.0*. Whereas AES requires blocks of 16 bytes (128 bits). The padding type in the second example is based on https://tools.ietf.org/html/rfc2315 *PKCS #7: Cryptographic Message Syntax Version 1.5*.
 
-The only difference between the two specs is only that PKCS #5 accommodates only for blocks of 8 bytes. The `padding` package reflects that and exposes two builders, resepectively `NewPkcs5Padding()` that embeds an hard-coded value for a block size of 8, while `NewPkcs7Padding(int blockSize)` takes a parameter for the block size. Nothing prevents using `NewPkcs7Padding` with a block size of 8 to work with an encryption scheme working on blocks of 8 bytes, like *Blowfish*.
+The only difference between the two specs is that PKCS #5 accommodates only for blocks of 8 bytes. The `padding` package reflects that and exposes two builders, respectively `NewPkcs5Padding()` that embeds a hard-coded value for a block size of 8, while `NewPkcs7Padding(int blockSize)` takes a parameter for the block size. Nothing prevents using `NewPkcs7Padding` with a block size of 8 to work with an encryption scheme working on blocks of 8 bytes, like *Blowfish*.
 
 ## Additional Examples
 
