@@ -59,7 +59,7 @@ func encrypt(pt, key []byte) []byte {
   }
   mode := ecb.NewECBEncrypter(block)
   padder := padding.NewPkcs5Padding()
-  pt, err = padder.Pad(pt) // padd last block of plaintext if block size less than block cipher size
+  pt, err = padder.Pad(pt) // pad last block of plaintext if block size less than block cipher size
   if err != nil {
     panic(err.Error())
   }
