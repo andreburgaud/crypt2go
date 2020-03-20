@@ -1,23 +1,23 @@
 .DEFAULT_GOAL := help
 VERSION := v0.11.0
 
-clean:
-	rm examples/aes/aes
-	rm examples/blowfish/blowfish
-
 fmt:
-	gofmt -l
+	gofmt -l .
 
 help:
 	@echo 'Makefile for Crypt2go'
 	@echo
 	@echo 'Usage:'
-	@echo '    make clean      Delete executables'
 	@echo '    make fmt        Format Go files'
 	@echo '    make help       Display this help message'
+	@echo '    make run        Execute program examples'
 	@echo '    make tag        GitHub tag (after manual git commit)'
 	@echo '    make test       Execute tests'
 	@echo '    make version    Display current package version'
+
+run:
+	go run examples/aes/main.go
+	go run examples/blowfish/main.go
 
 tag:
 	git push
@@ -30,4 +30,4 @@ test:
 version:
 	@echo 'Crypt2go version: ${VERSION}'
 
-.PHONY: check clean deploy fmt help lint test version
+.PHONY: fmt help run tag test version
