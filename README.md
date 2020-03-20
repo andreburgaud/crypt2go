@@ -18,25 +18,37 @@ or to update to the latest version:
 $ go get -u github.com/andreburgaud/crypt2go
 ```
 
-## Test
+## Development
 
-In the `crypt2go` directory:
+In the `crypt2go` directory, execute `make` or `make help` to display the build commands.
+
+### Test
 
 ```
-$ go test ./...
+$ make test
+```
+
+### Run Examples
+
+To execute the examples similar to these in the `README` (this file):
+
+```
+$ make run
 ```
 
 ## Disclaimer
 
-I'm, by no mean, an expert in cryptography and welcome any comment or suggestion to improve the code included in this repository.
+I'm, by no means, an expert in cryptography and welcome any comments or suggestions to improve the code included in this repository.
 
 ## ECB (Electronic Codebook)
 
-The ECB mode of operation should **NOT** be used anymore. This code was written to facilate migrating legacy data encrypted with ECB.
+The ECB mode of operation should **NOT** be used anymore. This code was written to facilitate migrating legacy data encrypted with ECB.
 
 There is plenty of literature explaining why ECB should not be used, starting with https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation, section *Electronic Codebook (ECB)*.
 
 Nevertheless, if like me, someone needed to solve a problem with legacy software and use ECB, this code might be helpful.
+
+## Examples
 
 ### Blowfish encryption in ECB mode with padding
 
@@ -91,11 +103,12 @@ func example() {
   ct := encrypt(pt, key)
   fmt.Printf("Ciphertext: %x\n", ct)
 
-  recovered_pt := decrypt(ct, key)
-  fmt.Printf("Recovered plaintext: %s\n", recovered_pt)
+  recoveredPt := decrypt(ct, key)
+  fmt.Printf("Recovered plaintext: %s\n", recoveredPt)
 }
 
 func main() {
+  fmt.Println("Blowfish encryption with ECB and PKCS5 padding")
   example()
 }
 ```
@@ -152,8 +165,8 @@ func example() {
   ct := encrypt(pt, key)
   fmt.Printf("Ciphertext: %x\n", ct)
 
-  recovered_pt := decrypt(ct, key)
-  fmt.Printf("Recovered plaintext: %s\n", recovered_pt)
+  recoveredPt := decrypt(ct, key)
+  fmt.Printf("Recovered plaintext: %s\n", recoveredPt)
 }
 
 func main() {
@@ -164,11 +177,11 @@ func main() {
 
 ## Padding
 
-Both ECB (Electronic Codebook) and CBC (Cipher Block Chaining) require blocks of fixed size. In order to comply with this requirement, it is necessary to `pad` the plain text to a size multiple of the block size in order to perform any encryption with these modes of operation.
+Both ECB (Electronic Codebook) and CBC (Cipher Block Chaining) require blocks of fixed size. Encryption with these modes of operation, ECB and CBC, requires to `pad` the plain text to a size multiple of the block size.
 
-The `padding` package exposes simple functions to provide a way to `pad` and `unpad` a given plaintext respectively prior to encryption and after decryption.
+The `padding` package exposes simple functions to provide a way to `pad` and `unpad` a given plaintext respectively before encryption and after decryption.
 
-The code examples in the previous section shows encryption examples with Blowfish and AES in ECB mode. Blowfish encrypts blocks of 8 bytes hence using the padding type described in the https://tools.ietf.org/html/rfc2898 *PKCS #5: Password-Based Cryptography Specification Version 2.0*. Whereas AES requires blocks of 16 bytes (128 bits). The padding type in the second example is based on https://tools.ietf.org/html/rfc2315 *PKCS #7: Cryptographic Message Syntax Version 1.5*.
+The code examples in the previous sections show encryption patterns with Blowfish and AES in ECB mode. Blowfish encrypts blocks of 8 bytes hence using the padding type described in the https://tools.ietf.org/html/rfc2898 *PKCS #5: Password-Based Cryptography Specification Version 2.0*. Whereas AES requires blocks of 16 bytes (128 bits). The padding type in the second example is based on https://tools.ietf.org/html/rfc2315 *PKCS #7: Cryptographic Message Syntax Version 1.5*.
 
 The only difference between the two specs is that PKCS #5 accommodates only for blocks of 8 bytes. The `padding` package reflects that and exposes two builders, respectively `NewPkcs5Padding()` that embeds a hard-coded value for a block size of 8, while `NewPkcs7Padding(int blockSize)` takes a parameter for the block size. Nothing prevents using `NewPkcs7Padding` with a block size of 8 to work with an encryption scheme working on blocks of 8 bytes, like *Blowfish*.
 
