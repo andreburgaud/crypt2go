@@ -53,6 +53,10 @@ func NewPkcs7Padding(blockSize int) Padding {
 // the original array will be padded with a full block.
 func (p *Padder) Pad(buf []byte) ([]byte, error) {
 	bufLen := len(buf)
+	//Unnecessary to pad
+	if bufLen % p.blockSize == 0 {
+		return  buf, nil
+	} 
 	padLen := p.blockSize - (bufLen % p.blockSize)
 	padText := bytes.Repeat([]byte{byte(padLen)}, padLen)
 	return append(buf, padText...), nil
