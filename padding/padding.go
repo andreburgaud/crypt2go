@@ -72,7 +72,7 @@ func (p *Padder) Unpad(buf []byte) ([]byte, error) {
 
 	pad := buf[bufLen-1]
 	padLen := int(pad)
-	if padLen > bufLen || padLen > p.blockSize {
+	if padLen == 0 || padLen > bufLen || padLen > p.blockSize {
 		return nil, errors.New("cryptgo/padding: invalid padding size")
 	}
 
