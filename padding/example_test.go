@@ -27,7 +27,7 @@ func ExamplePadder_Pad_second() {
 	fmt.Printf("%X\n", p)
 	// Output:
 	// 0A0B0C0D0A0B0C0D
-	// 0A0B0C0D0A0B0C0D0808080808080808
+	// 0A0B0C0D0A0B0C0D
 }
 
 func ExamplePadder_Pad_third() {
