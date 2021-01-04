@@ -116,6 +116,8 @@ func main() {
 ### AES Encryption in ECB mode with padding
 
 ```go
+package main
+
 import (
   "fmt"
 
@@ -184,6 +186,42 @@ The `padding` package exposes simple functions to provide a way to `pad` and `un
 The code examples in the previous sections show encryption patterns with Blowfish and AES in ECB mode. Blowfish encrypts blocks of 8 bytes hence using the padding type described in the https://tools.ietf.org/html/rfc2898 *PKCS #5: Password-Based Cryptography Specification Version 2.0*. Whereas AES requires blocks of 16 bytes (128 bits). The padding type in the second example is based on https://tools.ietf.org/html/rfc2315 *PKCS #7: Cryptographic Message Syntax Version 1.5*.
 
 The only difference between the two specs is that PKCS #5 accommodates only for blocks of 8 bytes. The `padding` package reflects that and exposes two builders, respectively `NewPkcs5Padding()` that embeds a hard-coded value for a block size of 8, while `NewPkcs7Padding(int blockSize)` takes a parameter for the block size. Nothing prevents using `NewPkcs7Padding` with a block size of 8 to work with an encryption scheme working on blocks of 8 bytes, like *Blowfish*.
+
+### Full block of padding
+
+To ensure that there is no ambiguity for the receiver of a message, padding is always performed, even if the message is of an exact multiple block size. This is intentional and comply with the NIST recommendations, * https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38a.pdf **Appendix A: Padding**, and the following RFCs: 
+
+* https://tools.ietf.org/html/rfc8018
+* https://tools.ietf.org/html/rfc1423
+* https://tools.ietf.org/html/rfc2898
+* https://tools.ietf.org/html/rfc5652
+
+The padding goes as follows for blocks of 8 bytes (8 octets):
+
+Given a message `M`, we obtain an encoded message `EM` by concatenating `M` with a padding string `PS`:
+
+```
+EM = M || PS
+```
+
+The padding string `PS` consists of `8 - (||M|| mod 8)` octets, each with value `8-(||M|| mod 8)`. Examples:
+
+```
+PS = 01, if ||M|| mod 8 = 7
+PS = 02 02, if ||M|| mod 8 = 6
+...
+PS = 08 08 08 08 08 08 08 08, if ||M|| mod 8 = 0 
+```
+
+The last example is important. Yes, it will add a full block of padding, and this is intentional. This removes the ambiguity for the receiver that expects every message to be padded. 
+
+To illustrate what would happen if some messages are not padded, let's take an example of a message with the last octet with value `01`. As the receiver of this message, should I remove the padding `01`? Or, is the last byte `0`, part of a message that was not padded because it was an exact multiple block size?
+
+If the receiver knows that every message is padded, even if this results in padding a message with a full block of `08`, there is no ambiguity.
+
+Another approach to remove this ambiguity would be to provide a separate indicator that would remove this ambiguity. An example would be to provide a message length indicator.
+
+The implementation in this package relies on padding every message (see method `padding.Pad()`).
 
 ## Additional Examples
 

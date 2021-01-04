@@ -27,7 +27,7 @@ func ExamplePadder_Pad_second() {
 	fmt.Printf("%X\n", p)
 	// Output:
 	// 0A0B0C0D0A0B0C0D
-	// 0A0B0C0D0A0B0C0D
+	// 0A0B0C0D0A0B0C0D0808080808080808
 }
 
 func ExamplePadder_Pad_third() {
@@ -100,4 +100,20 @@ func ExamplePadder_Unpad_empty() {
 	// Output:
 	// 0808080808080808
 	// []
+}
+
+func ExamplePadder_Unpad_Last_Zero() {
+	p := []byte{0x0A, 0x0B, 0x0C, 0x0D, 0x04, 0x04, 0x04, 0x00}
+	fmt.Printf("%X\n", p)
+	padder := NewPkcs5Padding()
+	p, err := padder.Unpad(p)
+	if err != nil {
+		//panic(err.Error())
+		fmt.Println(err)
+	} else {
+		fmt.Printf("%X\n", p)
+	}
+	// Output:
+	// 0A0B0C0D04040400
+	// crypto/padding: invalid last byte of padding
 }

@@ -53,10 +53,6 @@ func NewPkcs7Padding(blockSize int) Padding {
 // the original array will be padded with a full block.
 func (p *Padder) Pad(buf []byte) ([]byte, error) {
 	bufLen := len(buf)
-	//Unnecessary to pad
-	if bufLen % p.blockSize == 0 {
-		return  buf, nil
-	} 
 	padLen := p.blockSize - (bufLen % p.blockSize)
 	padText := bytes.Repeat([]byte{byte(padLen)}, padLen)
 	return append(buf, padText...), nil
@@ -71,18 +67,22 @@ func (p *Padder) Pad(buf []byte) ([]byte, error) {
 func (p *Padder) Unpad(buf []byte) ([]byte, error) {
 	bufLen := len(buf)
 	if bufLen == 0 {
-		return nil, errors.New("cryptgo/padding: invalid padding size")
+		return nil, errors.New("crypto/padding: invalid padding size")
 	}
 
 	pad := buf[bufLen-1]
+	if pad == 0 {
+		return nil, errors.New("crypto/padding: invalid last byte of padding")
+	}
+
 	padLen := int(pad)
 	if padLen > bufLen || padLen > p.blockSize {
-		return nil, errors.New("cryptgo/padding: invalid padding size")
+		return nil, errors.New("crypto/padding: invalid padding size")
 	}
 
 	for _, v := range buf[bufLen-padLen : bufLen-1] {
 		if v != pad {
-			return nil, errors.New("cryptgo/padding: invalid padding")
+			return nil, errors.New("crypto/padding: invalid padding")
 		}
 	}
 
