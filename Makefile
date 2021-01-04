@@ -30,4 +30,7 @@ test:
 version:
 	@echo 'Crypt2go version: ${VERSION}'
 
-.PHONY: fmt help run tag test version
+update:
+	go get -u -d ./...
+
+.PHONY: fmt help run tag test version update
