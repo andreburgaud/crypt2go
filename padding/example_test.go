@@ -108,7 +108,6 @@ func ExamplePadder_Unpad_Last_Zero() {
 	padder := NewPkcs5Padding()
 	p, err := padder.Unpad(p)
 	if err != nil {
-		//panic(err.Error())
 		fmt.Println(err)
 	} else {
 		fmt.Printf("%X\n", p)

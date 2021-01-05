@@ -204,7 +204,7 @@ Given a message `M`, we obtain an encoded message `EM` by concatenating `M` with
 EM = M || PS
 ```
 
-The padding string `PS` consists of `8 - (||M|| mod 8)` octets, each with value `8-(||M|| mod 8)`. Examples:
+The padding string `PS` consists of `8 - (||M|| mod 8)` octets, each with value `8 - (||M|| mod 8)`. Examples:
 
 ```
 PS = 01, if ||M|| mod 8 = 7
@@ -215,9 +215,9 @@ PS = 08 08 08 08 08 08 08 08, if ||M|| mod 8 = 0
 
 The last example is important. Yes, it will add a full block of padding, and this is intentional. This removes the ambiguity for the receiver that expects every message to be padded. 
 
-To illustrate what would happen if some messages are not padded, let's take an example of a message with the last octet with value `01`. As the receiver of this message, should I remove the padding `01`? Or, is the last byte `0`, part of a message that was not padded because it was an exact multiple block size?
+To illustrate what would happen if some messages are not padded, let's take an example of a message with the last octet with value `01`. As the receiver of this message, should I remove the padding `01`? Or, is the last byte `01`, part of a message that was not padded because it was an exact multiple block size?
 
-If the receiver knows that every message is padded, even if this results in padding a message with a full block of `08`, there is no ambiguity.
+If the receiver knows that every message is padded, even if this results in a message padded with a full block of `08`, there is no ambiguity.
 
 Another approach to remove this ambiguity would be to provide a separate indicator that would remove this ambiguity. An example would be to provide a message length indicator.
 
