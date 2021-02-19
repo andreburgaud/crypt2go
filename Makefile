@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-VERSION := v0.12.0
+VERSION := v0.13.0
 
 fmt:
 	gofmt -l .
@@ -32,5 +32,3 @@ version:
 
 update:
 	go get -u -d ./...
-
-.PHONY: fmt help run tag test version update
