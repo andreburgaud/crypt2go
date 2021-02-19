@@ -54,7 +54,7 @@ func (x *ecbEncrypter) BlockSize() int { return x.blockSize }
 
 func (x *ecbEncrypter) CryptBlocks(dst, src []byte) {
 
-	if len(src) % x.blockSize != 0 {
+	if len(src)%x.blockSize != 0 {
 		panic("crypto/cipher: input not full blocks")
 	}
 
