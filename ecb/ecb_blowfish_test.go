@@ -52,41 +52,37 @@ var ecbBlowfishTests = []ecbTest{
 }
 
 func TestECBEncrypterBlowfish(t *testing.T) {
-	for _, test := range ecbBlowfishTests {
-		c, err := blowfish.NewCipher(test.key)
-		if err != nil {
-			t.Errorf("%s: NewCipher(%d bytes) = %s", test.name, len(test.key), err)
-			continue
-		}
-
-		encrypter := NewECBEncrypter(c)
-
-		data := make([]byte, len(test.in))
-		copy(data, test.in)
-
-		encrypter.CryptBlocks(data, data)
-		if !bytes.Equal(test.out, data) {
-			t.Errorf("%s: ECBEncrypter\nhave %x\nwant %x", test.name, data, test.out)
-		}
+	for _, tc := range ecbBlowfishTests {
+		t.Run(tc.name, func(t *testing.T) {
+			c, err := blowfish.NewCipher(tc.key)
+			if err != nil {
+				t.Errorf("%s: NewCipher(%d bytes) = %s", tc.name, len(tc.key), err)
+			}
+			encrypter := NewECBEncrypter(c)
+			data := make([]byte, len(tc.in))
+			copy(data, tc.in)
+			encrypter.CryptBlocks(data, data)
+			if !bytes.Equal(tc.out, data) {
+				t.Errorf("%s: ECBEncrypter\nhave %x\nwant %x", tc.name, data, tc.out)
+			}
+		})
 	}
 }
 
 func TestECBDecrypterBlowfish(t *testing.T) {
-	for _, test := range ecbBlowfishTests {
-		c, err := blowfish.NewCipher(test.key)
-		if err != nil {
-			t.Errorf("%s: NewCipher(%d bytes) = %s", test.name, len(test.key), err)
-			continue
-		}
-
-		decrypter := NewECBDecrypter(c)
-
-		data := make([]byte, len(test.out))
-		copy(data, test.out)
-
-		decrypter.CryptBlocks(data, data)
-		if !bytes.Equal(test.in, data) {
-			t.Errorf("%s: ECBDecrypter\nhave %x\nwant %x", test.name, data, test.in)
-		}
+	for _, tc := range ecbBlowfishTests {
+		t.Run(tc.name, func(t *testing.T) {
+			c, err := blowfish.NewCipher(tc.key)
+			if err != nil {
+				t.Fatalf("%s: NewCipher(%d bytes) = %s", tc.name, len(tc.key), err)
+			}
+			decrypter := NewECBDecrypter(c)
+			data := make([]byte, len(tc.out))
+			copy(data, tc.out)
+			decrypter.CryptBlocks(data, data)
+			if !bytes.Equal(tc.in, data) {
+				t.Errorf("%s: ECBDecrypter\nhave %x\nwant %x", tc.name, data, tc.in)
+			}
+		})
 	}
 }
