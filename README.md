@@ -189,7 +189,7 @@ The only difference between the two specs is that PKCS #5 accommodates only for 
 
 ### Full block of padding
 
-To ensure that there is no ambiguity for the receiver of a message, padding is always performed, even if the message is of an exact multiple block size. This is intentional and comply with the NIST recommendations, * https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38a.pdf **Appendix A: Padding**, and the following RFCs: 
+To ensure that there is no ambiguity for the receiver of a message, padding is always performed, even if the message is of an exact multiple block size. This is intentional and comply with the NIST recommendations https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38a.pdf **Appendix A: Padding**, and the following RFCs: 
 
 * https://tools.ietf.org/html/rfc8018
 * https://tools.ietf.org/html/rfc1423
