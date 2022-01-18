@@ -1,5 +1,5 @@
 module github.com/andreburgaud/crypt2go
 
-go 1.16
+go 1.17
 
-require golang.org/x/crypto v0.0.0-20210218145215-b8e89b74b9df
+require golang.org/x/crypto v0.0.0-20220112180741-5e0467b6c7ce
