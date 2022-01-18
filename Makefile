@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-VERSION := v0.13.0
+VERSION := v1.0.0
 
 fmt:
 	gofmt -l .
@@ -32,3 +32,4 @@ version:
 
 update:
 	go get -u -d ./...
+	go mod tidy
