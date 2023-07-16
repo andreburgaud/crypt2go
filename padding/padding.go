@@ -45,9 +45,13 @@ func NewPkcs7Padding(blockSize int) Padding {
 // the new byte array will be an exact multiple of the expected block size.
 // For example, if the expected block size is 8 bytes (e.g. PKCS #5) and that
 // the initial byte array is:
-// 	[]byte{0x0A, 0x0B, 0x0C, 0x0D}
+//
+//	[]byte{0x0A, 0x0B, 0x0C, 0x0D}
+//
 // the returned array will be:
-// 	[]byte{0x0A, 0x0B, 0x0C, 0x0D, 0x04, 0x04, 0x04, 0x04}
+//
+//	[]byte{0x0A, 0x0B, 0x0C, 0x0D, 0x04, 0x04, 0x04, 0x04}
+//
 // The value of each octet of the padding is the size of the padding. If the
 // array passed as a parameter is already an exact multiple of the block size,
 // the original array will be padded with a full block.
@@ -61,9 +65,12 @@ func (p *Padder) Pad(buf []byte) ([]byte, error) {
 // Unpad removes the padding of a given byte array, according to the same rules
 // as described in the Pad function. For example if the byte array passed as a
 // parameter is:
-// 	[]byte{0x0A, 0x0B, 0x0C, 0x0D, 0x04, 0x04, 0x04, 0x04}
+//
+//	[]byte{0x0A, 0x0B, 0x0C, 0x0D, 0x04, 0x04, 0x04, 0x04}
+//
 // the returned array will be:
-// 	[]byte{0x0A, 0x0B, 0x0C, 0x0D}
+//
+//	[]byte{0x0A, 0x0B, 0x0C, 0x0D}
 func (p *Padder) Unpad(buf []byte) ([]byte, error) {
 	bufLen := len(buf)
 	if bufLen == 0 {
