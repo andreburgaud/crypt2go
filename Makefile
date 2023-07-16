@@ -13,7 +13,7 @@ help:
 	@echo '    make run        Execute program examples'
 	@echo '    make tag        GitHub tag (after manual git commit)'
 	@echo '    make test       Execute tests'
-	@echo '    make update     Update depdencies'
+	@echo '    make update     Update dependencies'
 	@echo '    make version    Display current package version'
 
 run:
