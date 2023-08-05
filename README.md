@@ -42,11 +42,7 @@ I'm not an expert in cryptography, and I welcome any comments or suggestions to 
 
 ## ECB (Electronic Codebook)
 
-The [ECB mode of operation](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Electronic_codebook_(ECB)) should **NOT** be used anymore. I wrote **Crypt2go** to facilitate migrating legacy data encrypted with ECB.
-
-Plenty of literature explains why ECB is not recommended in cryptographic protocols.
-
-Nevertheless, this code might be helpful if someone needs to solve a problem with legacy software using ECB.
+The [ECB mode of operation](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Electronic_codebook_(ECB)) should **NOT** be used anymore. I wrote **Crypt2go** to facilitate migrating legacy data encrypted with ECB. Plenty of literature explains why ECB is not recommended in cryptographic protocols. Nevertheless, this code might be helpful if someone needs to solve a problem with legacy software using ECB.
 
 ## Examples
 
