@@ -5,6 +5,7 @@ import (
 	"encoding/hex"
 	"fmt"
 
+	//nolint:staticcheck // SA1019 ignore this
 	"golang.org/x/crypto/blowfish"
 )
 

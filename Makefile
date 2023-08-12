@@ -1,6 +1,8 @@
 .DEFAULT_GOAL := help
 VERSION := v1.4.0
 
+release: fmt test lint
+
 fmt:
 	gofmt -l .
 
@@ -27,6 +29,9 @@ tag:
 
 test:
 	go test -v ./...
+
+lint:
+	golangci-lint run
 
 version:
 	@echo 'Crypt2go version: ${VERSION}'

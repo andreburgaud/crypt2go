@@ -8,6 +8,7 @@ import (
 	"bytes"
 	"testing"
 
+	//nolint:staticcheck // SA1019 ignore this
 	"golang.org/x/crypto/blowfish"
 )
 

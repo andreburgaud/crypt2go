@@ -102,7 +102,7 @@ func ExamplePadder_Unpad_empty() {
 	// []
 }
 
-func ExamplePadder_Unpad_Last_Zero() {
+func ExamplePadder_Unpad_lastzero() {
 	p := []byte{0x0A, 0x0B, 0x0C, 0x0D, 0x04, 0x04, 0x04, 0x00}
 	fmt.Printf("%X\n", p)
 	padder := NewPkcs5Padding()
