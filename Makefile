@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-VERSION := v1.4.0
+VERSION := v1.4.1
 
 fmt:
 	gofmt -l .
