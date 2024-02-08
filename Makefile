@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-VERSION := v1.4.2
+VERSION := v1.5.0
 
 fmt:
 	gofmt -l .
@@ -21,7 +21,7 @@ help:
 lint:
 	golangci-lint run
 
-release: fmt test lint
+release: update fmt test lint
 
 run:
 	go run examples/aes/main.go
