@@ -26,6 +26,7 @@ package ecb
 
 import (
 	"crypto/cipher"
+	"fmt"
 )
 
 type ecb struct {
@@ -53,13 +54,19 @@ func NewECBEncrypter(b cipher.Block) cipher.BlockMode {
 func (x *ecbEncrypter) BlockSize() int { return x.blockSize }
 
 func (x *ecbEncrypter) CryptBlocks(dst, src []byte) {
+	if err := x.CryptEcbBlocks(dst, src); err != nil {
+		panic(err.Error())
+	}
+}
+
+func (x *ecbEncrypter) CryptEcbBlocks(dst, src []byte) error {
 
 	if len(src)%x.blockSize != 0 {
-		panic("crypto/cipher: input not full blocks")
+		return fmt.Errorf("crypto/cipher: input not full blocks, received source len '%v' blocksize '%v'", len(src), x.blockSize)
 	}
 
 	if len(dst) < len(src) {
-		panic("crypto/cipher: output smaller than input")
+		return fmt.Errorf("crypto/cipher: output '%v' smaller than input '%v'", len(dst), len(src))
 	}
 
 	for len(src) > 0 {
@@ -67,6 +74,7 @@ func (x *ecbEncrypter) CryptBlocks(dst, src []byte) {
 		src = src[x.blockSize:]
 		dst = dst[x.blockSize:]
 	}
+	return nil
 }
 
 type ecbDecrypter ecb
@@ -80,14 +88,20 @@ func NewECBDecrypter(b cipher.Block) cipher.BlockMode {
 func (x *ecbDecrypter) BlockSize() int { return x.blockSize }
 
 func (x *ecbDecrypter) CryptBlocks(dst, src []byte) {
+	if err := x.CryptEcbBlocks(dst, src); err != nil {
+		panic(err.Error())
+	}
+}
+
+func (x *ecbDecrypter) CryptEcbBlocks(dst, src []byte) error {
 	if len(src)%x.blockSize != 0 {
-		panic("crypto/cipher: input not full blocks")
+		return fmt.Errorf("crypto/cipher: input not full blocks, received source len '%v' blocksize '%v'", len(src), x.blockSize)
 	}
 	if len(dst) < len(src) {
-		panic("crypto/cipher: output smaller than input")
+		return fmt.Errorf("crypto/cipher: output '%v' smaller than input '%v'", len(dst), len(src))
 	}
 	if len(src) == 0 {
-		return
+		return nil
 	}
 
 	for len(src) > 0 {
@@ -95,5 +109,5 @@ func (x *ecbDecrypter) CryptBlocks(dst, src []byte) {
 		src = src[x.blockSize:]
 		dst = dst[x.blockSize:]
 	}
-
+	return nil
 }
