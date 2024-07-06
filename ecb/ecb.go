@@ -54,27 +54,21 @@ func NewECBEncrypter(b cipher.Block) cipher.BlockMode {
 func (x *ecbEncrypter) BlockSize() int { return x.blockSize }
 
 func (x *ecbEncrypter) CryptBlocks(dst, src []byte) {
-	if err := x.CryptEcbBlocks(dst, src); err != nil {
-		panic(err.Error())
-	}
-}
-
-func (x *ecbEncrypter) CryptEcbBlocks(dst, src []byte) error {
-
+	var errorMessage string
 	if len(src)%x.blockSize != 0 {
-		return fmt.Errorf("crypto/cipher: input not full blocks, received source len '%v' blocksize '%v'", len(src), x.blockSize)
+		errorMessage = fmt.Sprintf("crypto/cipher: input not full blocks, received source len '%v' blocksize '%v'",
+			len(src), x.blockSize)
+		panic(errorMessage)
 	}
-
 	if len(dst) < len(src) {
-		return fmt.Errorf("crypto/cipher: output '%v' smaller than input '%v'", len(dst), len(src))
+		errorMessage = fmt.Sprintf("crypto/cipher: output '%v' smaller than input '%v'", len(dst), len(src))
+		panic(errorMessage)
 	}
-
 	for len(src) > 0 {
 		x.b.Encrypt(dst[:x.blockSize], src[:x.blockSize])
 		src = src[x.blockSize:]
 		dst = dst[x.blockSize:]
 	}
-	return nil
 }
 
 type ecbDecrypter ecb
@@ -88,26 +82,22 @@ func NewECBDecrypter(b cipher.Block) cipher.BlockMode {
 func (x *ecbDecrypter) BlockSize() int { return x.blockSize }
 
 func (x *ecbDecrypter) CryptBlocks(dst, src []byte) {
-	if err := x.CryptEcbBlocks(dst, src); err != nil {
-		panic(err.Error())
-	}
-}
-
-func (x *ecbDecrypter) CryptEcbBlocks(dst, src []byte) error {
+	var errorMessage string
 	if len(src)%x.blockSize != 0 {
-		return fmt.Errorf("crypto/cipher: input not full blocks, received source len '%v' blocksize '%v'", len(src), x.blockSize)
+		errorMessage = fmt.Sprintf("crypto/cipher: input not full blocks, received source len '%v' blocksize '%v'", len(src), x.blockSize)
+		panic(errorMessage)
 	}
 	if len(dst) < len(src) {
-		return fmt.Errorf("crypto/cipher: output '%v' smaller than input '%v'", len(dst), len(src))
+		errorMessage = fmt.Sprintf("crypto/cipher: output '%v' smaller than input '%v'", len(dst), len(src))
+		panic(errorMessage)
 	}
 	if len(src) == 0 {
-		return nil
-	}
 
+		return
+	}
 	for len(src) > 0 {
 		x.b.Decrypt(dst[:x.blockSize], src[:x.blockSize])
 		src = src[x.blockSize:]
 		dst = dst[x.blockSize:]
 	}
-	return nil
 }
