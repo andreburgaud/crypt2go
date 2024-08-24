@@ -32,8 +32,7 @@ func TestECBDecrypterAESPanic(t *testing.T) {
 		}
 	}()
 	key := []byte("AES256Key-32Characters1234567890")
-	ciphertext, err := hex.DecodeString("717FADE7B97198A8C2F67766FBAC7B") // correct value was "717FADE7B97198A8C2F67766FBAC7B07" (1 byte missing => should panic)
-
+	ciphertext, _ := hex.DecodeString("717FADE7B97198A8C2F67766FBAC7B") // correct value was "717FADE7B97198A8C2F67766FBAC7B07" (1 byte missing => should panic)
 	c, err := aes.NewCipher(key)
 	if err != nil {
 		t.Fatalf("NewCipher(%d bytes) = %s", len(key), err)
