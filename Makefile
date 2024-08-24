@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-VERSION := v1.7.0
+VERSION := v1.8.0
 
 fmt:
 	gofmt -l .
@@ -43,5 +43,5 @@ vet:
 	go vet ./...
 
 update:
-	go get -u -d ./...
+	go get -u ./...
 	go mod tidy
