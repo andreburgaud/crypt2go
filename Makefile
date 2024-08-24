@@ -21,7 +21,7 @@ help:
 lint:
 	golangci-lint run
 
-release: update fmt test lint
+release: update fmt test lint vet
 
 run:
 	go run examples/aes/main.go
@@ -37,6 +37,10 @@ test:
 
 version:
 	@echo 'Crypt2go version: ${VERSION}'
+
+vet:
+	go list ./...
+	go vet ./...
 
 update:
 	go get -u -d ./...
