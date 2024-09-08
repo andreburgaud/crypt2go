@@ -36,6 +36,7 @@ test:
 	go test -v ./...
 
 version:
+	@go version
 	@echo 'Crypt2go version: ${VERSION}'
 
 vet:
