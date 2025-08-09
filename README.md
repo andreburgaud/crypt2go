@@ -112,7 +112,7 @@ func main() {
 
 ### Blowfish encryption in ECB mode with padding
 
-**Note**: The Golang blowfish package is deprecated and should not be used for any new system (https://pkg.go.dev/golang.org/x/crypto/blowfish). Nevertheless, you could still benefit from the following example if you needed to convert legacy encryption from blowfish with ECB to a secure encryption algorithm and mode of encryption, for example, AES with GCM ([Gallois Counter Mode](https://en.wikipedia.org/wiki/Galois/Counter_Mode)).
+**Note**: The Golang blowfish package is deprecated and should not be used for any new system (https://pkg.go.dev/golang.org/x/crypto/blowfish). Nevertheless, you could still benefit from the following example if you needed to convert legacy encryption from blowfish with ECB to a secure encryption algorithm and mode of encryption, for example, AES with GCM ([Gallois Counter Mode](https://en.wikipedia.org/wiki/Galois/Counter_Mode)). To allow linting via golangci-lint to complete successfully, the import in the blowfish example is intentionally configured not to lint.
 
 ```go
 package main
